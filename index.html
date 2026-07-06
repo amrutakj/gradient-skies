@@ -3,592 +3,601 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pause, look up and observe the colors around you.</title>
+<title>Colors of the Sky</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap');
 
 *{box-sizing:border-box;margin:0;padding:0;}
 
 :root{
-  --bg:#faf8f5;
-  --text:#1c1a17;
-  --text2:#7a7570;
-  --text3:#b0aba4;
-  --border:rgba(0,0,0,0.08);
-  --border2:rgba(0,0,0,0.13);
-  --surface:#fff;
+  --bg:#0d0d10;
+  --surface:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);
+  --text:#f0eeeb;
+  --text2:#9a9890;
+  --text3:#5a5850;
+  --radius:12px;
 }
 
 html{scroll-behavior:smooth;}
-
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Inter',system-ui,sans-serif;
-  font-size:14px;
-  line-height:1.5;
-}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.5;min-height:100vh;}
 
 /* ── NAV ── */
 nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:1.25rem 2.5rem;
-  border-bottom:1px solid var(--border);
-  position:sticky;
-  top:0;
-  background:var(--bg);
-  z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.5rem 3rem;
 }
 
-.nav-logo{
-  font-family:'EB Garamond',serif;
-  font-size:17px;
-  font-style:italic;
+.nav-title{
+  font-size:clamp(26px,4vw,38px);
+  font-weight:600;
+  letter-spacing:-0.03em;
   color:var(--text);
-  text-decoration:none;
-  letter-spacing:0.01em;
+  line-height:1;
 }
 
-.nav-links{
-  display:flex;
-  gap:2rem;
-  list-style:none;
+.nav-title span{
+  background:linear-gradient(90deg,#c8a8e8,#f0a8c8,#f8c8a0);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
 }
 
-.nav-links a{
-  font-size:13px;
+.create-btn{
+  font-size:13px;font-weight:500;
   color:var(--text2);
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:100px;
+  padding:9px 18px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:7px;
   text-decoration:none;
-  transition:color 0.15s;
+  transition:border-color 0.2s,color 0.2s;
+  white-space:nowrap;
 }
-.nav-links a:hover{color:var(--text);}
+.create-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+.create-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.6;}
 
-/* ── HERO ── */
-.hero{
-  text-align:center;
-  padding:4rem 2rem 3rem;
+/* ── META BAR ── */
+.meta-bar{
+  padding:0 3rem 1.5rem;
+  display:flex;align-items:center;gap:1.5rem;
+  font-size:13px;color:var(--text3);
   border-bottom:1px solid var(--border);
+  flex-wrap:wrap;
 }
-
-.hero-tagline{
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:var(--text3);
-  margin-bottom:1rem;
-}
-
-.hero-title{
-  font-family:'EB Garamond',serif;
-  font-size:clamp(28px,4vw,44px);
-  font-weight:400;
-  line-height:1.2;
-  color:var(--text);
-  max-width:560px;
-  margin:0 auto 1rem;
-  letter-spacing:-0.01em;
-}
-
-.hero-title em{font-style:italic;}
-
-.hero-desc{
-  font-size:14px;
-  color:var(--text2);
-  max-width:380px;
-  margin:0 auto;
-  line-height:1.7;
-}
+.meta-sep{color:var(--text3);opacity:0.4;}
+.meta-item{display:flex;align-items:center;gap:5px;}
+.meta-item svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6;opacity:0.6;}
 
 /* ── ARCHIVE ── */
-.archive{padding:0 2.5rem 6rem;}
+.archive{padding:0 3rem 6rem;}
 
-/* Month section */
-.month-section{border-bottom:1px solid var(--border);padding:3.5rem 0 3rem;}
+.month-section{padding:3rem 0 1rem;border-bottom:1px solid var(--border);}
 .month-section:last-child{border-bottom:none;}
 
 .month-header{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  margin-bottom:2rem;
-  gap:1rem;
-  flex-wrap:wrap;
+  display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:1.5rem;gap:1rem;
 }
 
+.month-left{}
 .month-name{
-  font-family:'EB Garamond',serif;
-  font-size:clamp(22px,3vw,30px);
-  font-weight:400;
+  font-size:clamp(20px,3vw,26px);
+  font-weight:600;
+  letter-spacing:-0.02em;
   color:var(--text);
-  letter-spacing:-0.01em;
+  margin-bottom:3px;
 }
+.month-locs{font-size:13px;color:var(--text3);}
 
-.month-meta{
-  display:flex;
-  align-items:center;
-  gap:1.25rem;
-  flex-wrap:wrap;
+.cotm-wrap{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--text3);
+  white-space:nowrap;
+  margin-top:4px;
 }
-
-.cotm-pill{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  background:var(--surface);
-  border:1px solid var(--border2);
-  border-radius:100px;
-  padding:6px 12px 6px 8px;
-  font-size:12px;
-  color:var(--text2);
-}
-
-.cotm-dot{
-  width:18px;height:18px;border-radius:50%;
-  border:0.5px solid rgba(0,0,0,0.1);
+.cotm-swatch{
+  width:20px;height:20px;border-radius:4px;
+  border:1px solid rgba(255,255,255,0.1);
   flex-shrink:0;
 }
 
-.cotm-label{color:var(--text3);font-size:11px;margin-right:1px;}
-
-.month-locations{
-  font-size:12px;
-  color:var(--text3);
-}
-
-/* Sky grid */
+/* ── GRID ── */
 .sky-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:12px;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
 }
 
-/* Sky card */
+@media(max-width:1100px){.sky-grid{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:800px){.sky-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:560px){.sky-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ── SKY CARD ── */
 .sky-card{
-  border-radius:16px;
-  overflow:hidden;
   position:relative;
-  aspect-ratio:3/4;
+  border-radius:var(--radius);
+  overflow:hidden;
+  aspect-ratio:4/3;
   cursor:pointer;
-  group:true;
+  background:#1a1a1c;
+}
+
+/* The actual photo — hidden by default, shown on hover */
+.card-photo{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity 0.35s ease;
+  z-index:1;
+}
+
+/* The blurred version — always shown */
+.card-blur{
+  position:absolute;inset:-20px;
+  width:calc(100% + 40px);
+  height:calc(100% + 40px);
+  object-fit:cover;
+  filter:blur(18px) saturate(1.3) brightness(0.95);
+  transform:scale(1.05);
+  transition:opacity 0.35s ease;
+  z-index:0;
+}
+
+/* On hover: show photo, hide blur */
+.sky-card:hover .card-photo{opacity:1;}
+.sky-card:hover .card-blur{opacity:0;}
+
+/* Overlay — only on hover */
+.card-overlay{
+  position:absolute;inset:0;
+  z-index:2;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:10px;
+  opacity:0;
+  transition:opacity 0.25s ease;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.25) 0%,transparent 40%,transparent 55%,rgba(0,0,0,0.55) 100%);
 }
 
 .sky-card:hover .card-overlay{opacity:1;}
-.sky-card:hover .sky-gradient{transform:scale(1.02);}
-
-.sky-gradient{
-  width:100%;
-  height:100%;
-  display:block;
-  transition:transform 0.35s ease;
-}
-
-/* Card overlay */
-.card-overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
-  opacity:0;
-  transition:opacity 0.25s ease;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:14px;
-  gap:8px;
-}
 
 .card-location{
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.06em;
+  font-size:11px;font-weight:600;
+  letter-spacing:0.07em;
   text-transform:uppercase;
-  color:rgba(255,255,255,0.8);
+  color:rgba(255,255,255,0.9);
+  text-shadow:0 1px 4px rgba(0,0,0,0.5);
 }
 
 .card-actions{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
+  display:flex;gap:6px;flex-wrap:wrap;
 }
 
 .card-btn{
-  font-size:11px;
-  font-weight:500;
+  font-size:11px;font-weight:500;
   color:#fff;
-  background:rgba(0,0,0,0.35);
-  border:1px solid rgba(255,255,255,0.25);
+  background:rgba(0,0,0,0.4);
+  border:1px solid rgba(255,255,255,0.2);
   border-radius:100px;
   padding:5px 11px;
   cursor:pointer;
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(10px);
   transition:background 0.15s;
   white-space:nowrap;
-  display:flex;
-  align-items:center;
-  gap:5px;
+  display:flex;align-items:center;gap:4px;
 }
-
-.card-btn:hover{background:rgba(0,0,0,0.55);}
+.card-btn:hover{background:rgba(0,0,0,0.65);}
 .card-btn svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;}
 
-/* Color chips on card (visible always, bottom bar) */
-.card-colors{
-  position:absolute;
-  bottom:0;left:0;right:0;
-  height:5px;
-  display:flex;
+/* Placeholder card — for adding photos */
+.sky-card.placeholder{
+  border:1.5px dashed rgba(255,255,255,0.1);
+  background:transparent;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:8px;
+  cursor:pointer;
+  transition:border-color 0.2s,background 0.2s;
 }
-
-.card-color-seg{flex:1;}
+.sky-card.placeholder:hover{border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.03);}
+.placeholder-icon{width:32px;height:32px;stroke:var(--text3);fill:none;stroke-width:1.4;}
+.placeholder-label{font-size:11px;color:var(--text3);}
 
 /* ── LIGHTBOX ── */
 .lightbox{
   position:fixed;inset:0;
-  background:rgba(28,26,23,0.7);
-  backdrop-filter:blur(12px);
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(16px);
   z-index:200;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  pointer-events:none;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
   transition:opacity 0.2s;
   padding:1.5rem;
 }
-
 .lightbox.open{opacity:1;pointer-events:all;}
 
-.lb-card{
-  background:var(--surface);
-  border-radius:24px;
+.lb-inner{
+  background:#18181c;
+  border:1px solid var(--border);
+  border-radius:20px;
   overflow:hidden;
-  width:min(480px,100%);
-  max-height:90vh;
-  overflow-y:auto;
-  transform:translateY(16px);
+  width:min(600px,100%);
+  transform:scale(0.97);
   transition:transform 0.25s ease;
-  box-shadow:0 24px 64px rgba(0,0,0,0.2);
+  box-shadow:0 32px 80px rgba(0,0,0,0.5);
 }
+.lightbox.open .lb-inner{transform:scale(1);}
 
-.lightbox.open .lb-card{transform:translateY(0);}
-
-.lb-gradient{
-  width:100%;
-  height:240px;
-  display:block;
-  flex-shrink:0;
+.lb-photo-wrap{position:relative;}
+.lb-photo{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;}
+.lb-blur-overlay{
+  position:absolute;inset:0;
+  backdrop-filter:blur(0px);
 }
-
-.lb-body{padding:1.5rem;}
-
-.lb-location{
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  color:var(--text3);
-  margin-bottom:0.35rem;
+.lb-close{
+  position:absolute;top:12px;right:12px;
+  background:rgba(0,0,0,0.45);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:50%;width:32px;height:32px;
+  color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;line-height:1;
+  backdrop-filter:blur(8px);
+  transition:background 0.15s;
+  z-index:10;
 }
+.lb-close:hover{background:rgba(0,0,0,0.7);}
 
-.lb-title{
-  font-family:'EB Garamond',serif;
-  font-size:24px;
-  font-weight:400;
-  color:var(--text);
-  margin-bottom:1.25rem;
-  letter-spacing:-0.01em;
-}
+.lb-body{padding:1.25rem 1.5rem 1.5rem;}
+.lb-loc{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+.lb-name{font-size:20px;font-weight:600;letter-spacing:-0.02em;color:var(--text);margin-bottom:1rem;}
 
-.lb-swatches{
-  display:flex;
-  gap:8px;
-  margin-bottom:1.25rem;
-  flex-wrap:wrap;
-}
-
+.lb-swatches{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
 .lb-swatch{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:5px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
   cursor:pointer;
 }
-
-.lb-swatch-circle{
-  width:40px;height:40px;border-radius:50%;
-  border:1px solid rgba(0,0,0,0.08);
+.lb-swatch-box{
+  width:36px;height:36px;border-radius:8px;
+  border:1px solid rgba(255,255,255,0.08);
   transition:transform 0.15s;
 }
-.lb-swatch:hover .lb-swatch-circle{transform:scale(1.1);}
+.lb-swatch:hover .lb-swatch-box{transform:scale(1.1);}
+.lb-hex{font-size:9px;font-family:monospace;color:var(--text3);}
 
-.lb-hex{
-  font-size:10px;
-  font-family:'Courier New',monospace;
-  color:var(--text3);
-}
-
-.lb-actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
+.lb-actions{display:flex;gap:8px;flex-wrap:wrap;}
 .lb-btn{
-  font-size:12px;
-  font-weight:500;
+  font-size:12px;font-weight:500;
   color:var(--text);
-  background:var(--bg);
-  border:1px solid var(--border2);
+  background:rgba(255,255,255,0.06);
+  border:1px solid var(--border);
   border-radius:100px;
-  padding:8px 16px;
-  cursor:pointer;
+  padding:9px 18px;cursor:pointer;
   display:flex;align-items:center;gap:6px;
-  transition:background 0.15s,border-color 0.15s;
-  text-decoration:none;
-}
-.lb-btn:hover{background:#eee;border-color:rgba(0,0,0,0.2);}
-.lb-btn.primary{background:var(--text);color:#fff;border-color:var(--text);}
-.lb-btn.primary:hover{background:#333;}
-.lb-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
-
-.lb-close{
-  position:absolute;top:1.25rem;right:1.25rem;
-  background:rgba(0,0,0,0.12);
-  border:none;border-radius:50%;
-  width:32px;height:32px;
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--text);
-  font-size:18px;
-  line-height:1;
   transition:background 0.15s;
 }
-.lb-close:hover{background:rgba(0,0,0,0.2);}
+.lb-btn:hover{background:rgba(255,255,255,0.12);}
+.lb-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
 
-/* ── FOOTER ── */
-footer{
-  border-top:1px solid var(--border);
-  padding:2rem 2.5rem;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:1rem;
-}
-
-.footer-logo{
-  font-family:'EB Garamond',serif;
-  font-style:italic;
-  font-size:16px;
-  color:var(--text2);
-}
-
-.footer-note{
-  font-size:12px;
-  color:var(--text3);
-}
-
-/* Toast */
+/* ── TOAST ── */
 .toast{
   position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);
-  background:var(--text);color:#fff;
+  background:#fff;color:#111;
   font-size:12px;font-weight:500;
   padding:9px 18px;border-radius:100px;
-  pointer-events:none;
-  opacity:0;transition:opacity 0.2s;
-  z-index:999;
-  white-space:nowrap;
+  pointer-events:none;opacity:0;transition:opacity 0.2s;
+  z-index:999;white-space:nowrap;
 }
 .toast.show{opacity:1;}
 
-canvas{display:none;}
+/* ── HOW TO ADD ── */
+.how-to{
+  margin:2rem 3rem;
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:1.25rem 1.5rem;
+}
+.how-to h3{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:0.5rem;}
+.how-to p{font-size:12px;color:var(--text3);line-height:1.7;}
+.how-to code{
+  font-family:monospace;font-size:11px;
+  background:rgba(255,255,255,0.07);
+  padding:2px 6px;border-radius:4px;
+  color:var(--text2);
+}
 
 @media(max-width:640px){
-  nav{padding:1rem 1.25rem;}
+  nav{padding:1.25rem 1.25rem;}
+  .meta-bar{padding:0 1.25rem 1.25rem;}
   .archive{padding:0 1.25rem 4rem;}
-  .month-section{padding:2.5rem 0 2rem;}
-  footer{padding:1.5rem 1.25rem;}
+  .how-to{margin:1.5rem 1.25rem;}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="nav-logo">Gradient Skies</a>
-  <ul class="nav-links">
-    <li><a href="#archive">Archive</a></li>
-    <li><a href="#about">About</a></li>
-  </ul>
+  <h1 class="nav-title">Colors of <span>the Sky</span></h1>
+  <a href="#how-to" class="create-btn">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    Add your skies
+  </a>
 </nav>
 
-<section class="hero">
-  <p class="hero-tagline">A growing archive</p>
-  <h1 class="hero-title">Pause, look up and observe the <em>colors</em> around you.</h1>
-  <p class="hero-desc">A growing archive of sunset gradients for anyone who enjoys color in nature.</p>
-</section>
+<div class="meta-bar">
+  <div class="meta-item">
+    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+    Your City
+  </div>
+  <span class="meta-sep">·</span>
+  <div class="meta-item">
+    <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+    — °C
+  </div>
+  <span class="meta-sep">·</span>
+  <div class="meta-item">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+    Sunset archive — hover any sky to reveal the photo
+  </div>
+</div>
 
 <main class="archive" id="archive"></main>
 
-<footer>
-  <span class="footer-logo">Gradient Skies</span>
-  <span class="footer-note">A growing archive of sunset gradients · made with love</span>
-</footer>
+<div class="how-to" id="how-to">
+  <h3>📸 How to add your own sky photos</h3>
+  <p>
+    In the <code>&lt;script&gt;</code> below, find the <code>archive</code> array. Each month has a <code>skies</code> list.
+    For each sky, set <code>src</code> to your image filename (e.g. <code>"photos/bangalore-nov-1.jpg"</code>),
+    give it a <code>location</code>, <code>name</code>, and the <code>colors</code> array (hex codes you pick from the photo).
+    Upload your photos to the same folder as <code>index.html</code> in your GitHub repo.
+    The site will blur them automatically to create the gradient effect — hover reveals the real photo.
+  </p>
+</div>
 
-<!-- Lightbox -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLB(event)">
-  <div class="lb-card" id="lb-card">
-    <canvas class="lb-gradient" id="lb-canvas" width="480" height="240"></canvas>
+  <div class="lb-inner" id="lb-inner">
+    <div class="lb-photo-wrap">
+      <img class="lb-photo" id="lb-photo" src="" alt="">
+      <button class="lb-close" onclick="closeLB(null)">×</button>
+    </div>
     <div class="lb-body">
-      <p class="lb-location" id="lb-location"></p>
-      <h2 class="lb-title" id="lb-title"></h2>
+      <p class="lb-loc" id="lb-loc"></p>
+      <h2 class="lb-name" id="lb-name"></h2>
       <div class="lb-swatches" id="lb-swatches"></div>
       <div class="lb-actions">
-        <button class="lb-btn primary" onclick="downloadLB()">
+        <button class="lb-btn" onclick="downloadLB()">
           <svg viewBox="0 0 24 24"><path d="M12 3v13M8 12l4 4 4-4"/><path d="M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2"/></svg>
           Download PNG
         </button>
-        <button class="lb-btn" id="css-copy-btn" onclick="copyLBCSS()">
+        <button class="lb-btn" id="lb-css-btn" onclick="copyLBCSS()">
           <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
           Copy CSS code
         </button>
       </div>
     </div>
-    <button class="lb-close" onclick="closeLB(null)">×</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
-<canvas id="dl-canvas" style="display:none"></canvas>
 
 <script>
-// ── DATA ──
+// ═══════════════════════════════════════════════════════
+// YOUR ARCHIVE DATA
+// To add your own photos:
+//   1. Upload your .jpg/.png files to GitHub in a folder called "photos/"
+//   2. Set src: "photos/your-filename.jpg"
+//   3. Add hex color codes you see in the photo (use eyedropper or the gradient extractor tool)
+//   4. Set location and name
+// ═══════════════════════════════════════════════════════
 const archive = [
   {
-    month: "June 2025",
-    cotm: { name: "Azure Sky", hex: "#d0edff" },
-    locations: "Bangalore, Maldives",
+    month: "November",
+    locations: "Bangalore",
+    cotm: { name: "Dusty Mauve", hex: "#b8a0c8" },
     skies: [
-      { location: "Bangalore", name: "Powder Dusk", colors: ["#c8e8ff","#a8cfe8","#7baac8","#5a84a8","#3a5f88"] },
-      { location: "Maldives",  name: "Lagoon Fade", colors: ["#e0f4ff","#90d4f0","#50a8d8","#2878b0","#0a4888"] },
-      { location: "Bangalore", name: "Pale Horizon",colors: ["#ddeeff","#b8d8f0","#88b8d8","#5890b8","#386898"] },
-      { location: "Maldives",  name: "Reef Blue",   colors: ["#a0dff0","#60c0e0","#2098c8","#0070a8","#004880"] },
-      { location: "Bangalore", name: "Silver Cloud",colors: ["#e8f4ff","#c8e0f4","#98c4e4","#68a0c8","#3878a8"] },
+      {
+        src: "Surfers Paradise.jpg",        // ← replace with your photo path
+        location: "Surfers Paradise",
+        name: "Twilight Haze",
+        colors: ["#8878a8","#c0a8c8","#d8c0d8","#a890b8","#786898"]
+      },
+      {
+        src: "Burleigh 2.jpg",
+        location: "Burleigh Heads",
+        name: "Crystal Blue",
+        colors: ["#c09098","#d8a8b0","#e8c0c8","#c8a0a8","#a08090"]
+      },
+      {
+        src: "GC Burleigh 1.jpg",
+        location: "Gold Coast",
+        name: "Olive Horizon",
+        colors: ["#909870","#b0b888","#c8c8a0","#a8a878","#888860"]
+      },
+      {
+        src: "photos/nov-4.jpg",
+        location: "Bangalore",
+        name: "Seafoam Eve",
+        colors: ["#78a898","#98c0b0","#b8d8c8","#90b8a8","#688888"]
+      },
+      {
+        src: "photos/nov-5.jpg",
+        location: "Bangalore",
+        name: "Blush Cloud",
+        colors: ["#d8b8b0","#e8c8c0","#f0d8d0","#d8c0b8","#c0a098"]
+      },
     ]
   },
   {
-    month: "May 2025",
-    cotm: { name: "Gentle Mist", hex: "#bdc0c3" },
-    locations: "Bangalore, Maldives, Pune",
+    month: "October",
+    locations: "Dallas, San Francisco",
+    cotm: { name: "Steel Blue", hex: "#7888b8" },
     skies: [
-      { location: "Maldives",  name: "Overcast Pearl", colors: ["#d8dce0","#b8bcc4","#9098a8","#687088","#485068"] },
-      { location: "Bangalore", name: "Monsoon Veil",   colors: ["#c8ccd4","#a0a8b4","#788090","#505870","#303858"] },
-      { location: "Maldives",  name: "Steel Dawn",     colors: ["#c0c8d0","#9098a8","#607080","#385060","#183040"] },
-      { location: "Bangalore", name: "Fog Linen",      colors: ["#dce0e4","#bcc0c8","#9098a4","#687080","#484858"] },
-      { location: "Pune",      name: "Smoke Dusk",     colors: ["#d0d4d8","#a8adb4","#808590","#585d68","#383d48"] },
+      {
+        src: "photos/oct-1.jpg",
+        location: "San Francisco",
+        name: "Bay Dusk",
+        colors: ["#6878a8","#8898c0","#a8b8d8","#8898b8","#586888"]
+      },
+      {
+        src: "photos/oct-2.jpg",
+        location: "Dallas",
+        name: "Stormy Noon",
+        colors: ["#606878","#888fa0","#b0b8c8","#8090a8","#505870"]
+      },
+      {
+        src: "photos/oct-3.jpg",
+        location: "San Francisco",
+        name: "Teal Horizon",
+        colors: ["#507888","#70a0b0","#90c0c8","#6898a8","#486880"]
+      },
+      {
+        src: "photos/oct-4.jpg",
+        location: "Dallas",
+        name: "Periwinkle",
+        colors: ["#7880b0","#98a0c8","#b8c0e0","#9098c0","#6870a0"]
+      },
+      {
+        src: "photos/oct-5.jpg",
+        location: "San Francisco",
+        name: "Lavender Fall",
+        colors: ["#a090c0","#c0b0d8","#d8c8e8","#b0a0c8","#9080b0"]
+      },
+      {
+        src: "photos/oct-6.jpg",
+        location: "Dallas",
+        name: "Powder Blue",
+        colors: ["#8898c0","#a8b8d8","#c8d0e8","#a0b0c8","#7888a8"]
+      },
+      {
+        src: "photos/oct-7.jpg",
+        location: "San Francisco",
+        name: "Dusk Slate",
+        colors: ["#6070a0","#8090b8","#a0b0d0","#7888a8","#506080"]
+      },
+      {
+        src: "photos/oct-8.jpg",
+        location: "Dallas",
+        name: "Muted Coral",
+        colors: ["#c09080","#d8a898","#e8c0b0","#c8a090","#a88070"]
+      },
+      {
+        src: "photos/oct-9.jpg",
+        location: "San Francisco",
+        name: "Evening Cream",
+        colors: ["#d8c8a8","#e8d8b8","#f0e8d0","#d8c8b0","#c0b090"]
+      },
+      {
+        src: "photos/oct-10.jpg",
+        location: "Dallas",
+        name: "Fog Drift",
+        colors: ["#b0b8c0","#c8d0d8","#d8e0e8","#b8c0c8","#9098a0"]
+      },
     ]
   },
   {
-    month: "April 2025",
-    cotm: { name: "Sunset Blaze", hex: "#ffe5d5" },
-    locations: "Bangalore, Pune",
+    month: "September",
+    locations: "Bangalore, Mountain View, San Francisco",
+    cotm: { name: "Golden Amber", hex: "#f0c050" },
     skies: [
-      { location: "Pune",      name: "Tangerine Dusk", colors: ["#ffe0a0","#f8b870","#f08048","#c85830","#902018"] },
-      { location: "Bangalore", name: "Ember Hour",     colors: ["#ffd890","#f8a860","#f07038","#c84820","#901008"] },
-      { location: "Bangalore", name: "Rose Horizon",   colors: ["#ffc8c0","#f89080","#e06050","#b83830","#882018"] },
-      { location: "Bangalore", name: "Apricot Sky",    colors: ["#ffe8c0","#f8c080","#f09048","#c86828","#904010"] },
-      { location: "Bangalore", name: "Crimson Fade",   colors: ["#ffd0b0","#f8a070","#e07040","#b84820","#882010"] },
-    ]
-  },
-  {
-    month: "March 2025",
-    cotm: { name: "Azure Sky", hex: "#7ea8da" },
-    locations: "Bangalore, Pune",
-    skies: [
-      { location: "Bangalore", name: "Morning Cerulean", colors: ["#b8d8f8","#7ea8da","#4878b8","#285090","#103068"] },
-      { location: "Bangalore", name: "Cobalt Dusk",      colors: ["#c0d8f0","#88b0d8","#5080b8","#2858a0","#103078"] },
-      { location: "Bangalore", name: "Periwinkle Hour",  colors: ["#c8d0f8","#9098e0","#6068c0","#3840a0","#182080"] },
-      { location: "Bangalore", name: "Navy Blush",       colors: ["#d0d8f8","#a0a8e8","#7078c8","#4050a8","#203080"] },
-      { location: "Bangalore", name: "Pale Indigo",      colors: ["#d8d8f8","#a8a8e8","#7878c8","#5050a8","#282880"] },
-      { location: "Pune",      name: "Twilight Blue",    colors: ["#c0c8f0","#8890d8","#5060b8","#2838a0","#102080"] },
-      { location: "Pune",      name: "Denim Sky",        colors: ["#b0c8e8","#7098c8","#3870a8","#185090","#083068"] },
-    ]
-  },
-  {
-    month: "February 2025",
-    cotm: { name: "Golden Hour", hex: "#ffe05e" },
-    locations: "Bangalore, Mumbai",
-    skies: [
-      { location: "Bangalore", name: "Saffron Crown",  colors: ["#fff0a0","#f8d060","#f0a820","#c87800","#905000"] },
-      { location: "Mumbai",    name: "Brass Horizon",  colors: ["#ffe8a0","#f8c860","#f09820","#c87000","#904800"] },
-      { location: "Mumbai",    name: "Marigold Dusk",  colors: ["#fff0a8","#f8d068","#f0a828","#d08000","#a05800"] },
-      { location: "Mumbai",    name: "Amber Fade",     colors: ["#ffe8a8","#f8c868","#e89830","#c07010","#904800"] },
-      { location: "Bangalore", name: "Wheat Glow",     colors: ["#fff8b8","#f8e080","#f0c040","#c89010","#906000"] },
-    ]
-  },
-  {
-    month: "January 2025",
-    cotm: { name: "Sunset Blaze", hex: "#fc9c92" },
-    locations: "Bangalore, Goa",
-    skies: [
-      { location: "Bangalore", name: "Coral Dusk",    colors: ["#ffd0c8","#f8a098","#f07068","#c84848","#902030"] },
-      { location: "Bangalore", name: "Flamingo Sky",  colors: ["#ffccc8","#f89898","#f06868","#c84040","#902028"] },
-      { location: "Bangalore", name: "Watermelon",    colors: ["#ffd0c0","#f8a088","#f07060","#c84840","#902028"] },
-      { location: "Goa",       name: "Hibiscus Hour", colors: ["#ffc8c0","#f89090","#f06070","#c83850","#882038"] },
+      {
+        src: "photos/sep-1.jpg",
+        location: "Bangalore",
+        name: "Warm Dusk",
+        colors: ["#e0a850","#f0c070","#f8d890","#e8b860","#c89040"]
+      },
+      {
+        src: "photos/sep-2.jpg",
+        location: "Mountain View",
+        name: "Pacific Gold",
+        colors: ["#d89840","#f0b860","#f8d080","#e0a850","#c08030"]
+      },
+      {
+        src: "photos/sep-3.jpg",
+        location: "San Francisco",
+        name: "Bay Ember",
+        colors: ["#c87840","#e09860","#f0b880","#d88850","#b06830"]
+      },
+      {
+        src: "photos/sep-4.jpg",
+        location: "Bangalore",
+        name: "Saffron Hour",
+        colors: ["#f0a030","#f8c050","#f8d870","#f0b040","#d88820"]
+      },
+      {
+        src: "photos/sep-5.jpg",
+        location: "San Francisco",
+        name: "Tangerine",
+        colors: ["#e88040","#f0a060","#f8c080","#e89050","#d07030"]
+      },
     ]
   },
 ];
 
-// ── RENDER ──
+// ═══════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════
 const archiveEl = document.getElementById('archive');
+let currentSky = null;
 
 archive.forEach(month => {
   const sec = document.createElement('section');
   sec.className = 'month-section';
 
+  // Header
   const hdr = document.createElement('div');
   hdr.className = 'month-header';
   hdr.innerHTML = `
-    <h2 class="month-name">${month.month}</h2>
-    <div class="month-meta">
-      <div class="cotm-pill">
-        <div class="cotm-dot" style="background:${month.cotm.hex}"></div>
-        <span class="cotm-label">Color of the month</span>
-        <span>${month.cotm.name} · <span style="font-family:monospace;font-size:11px">${month.cotm.hex}</span></span>
-      </div>
-      <span class="month-locations">${month.locations}</span>
+    <div class="month-left">
+      <h2 class="month-name">${month.month}</h2>
+      <p class="month-locs">${month.locations}</p>
+    </div>
+    <div class="cotm-wrap">
+      <div class="cotm-swatch" style="background:${month.cotm.hex}"></div>
+      Color of the month · ${month.cotm.name}
     </div>
   `;
   sec.appendChild(hdr);
 
+  // Grid
   const grid = document.createElement('div');
   grid.className = 'sky-grid';
 
-  month.skies.forEach((sky, i) => {
+  month.skies.forEach(sky => {
     const card = document.createElement('div');
     card.className = 'sky-card';
 
-    // Draw gradient to canvas, transfer to img
-    const cvs = document.createElement('canvas');
-    cvs.width = 320; cvs.height = 426;
-    const ctx = cvs.getContext('2d');
-    const grad = ctx.createLinearGradient(0, 0, 0, 426);
-    sky.colors.forEach((c, ci) => grad.addColorStop(ci / (sky.colors.length - 1), c));
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 320, 426);
+    // Blurred version (always visible - creates gradient look)
+    const blurImg = document.createElement('img');
+    blurImg.className = 'card-blur';
+    blurImg.src = sky.src;
+    blurImg.alt = '';
+    blurImg.loading = 'lazy';
+    // Fallback: if image missing, show a CSS gradient
+    blurImg.onerror = function() {
+      this.style.display = 'none';
+      card.style.background = `linear-gradient(135deg, ${sky.colors.join(', ')})`;
+    };
 
-    const img = document.createElement('img');
-    img.className = 'sky-gradient';
-    img.src = cvs.toDataURL();
-    img.alt = sky.name;
+    // Sharp photo (shown on hover)
+    const photo = document.createElement('img');
+    photo.className = 'card-photo';
+    photo.src = sky.src;
+    photo.alt = sky.name;
+    photo.loading = 'lazy';
+    photo.onerror = function() { this.style.display = 'none'; };
 
+    // Overlay
     const overlay = document.createElement('div');
     overlay.className = 'card-overlay';
     overlay.innerHTML = `
       <span class="card-location">${sky.location}</span>
       <div class="card-actions">
-        <button class="card-btn" onclick="event.stopPropagation();downloadCard(${JSON.stringify(sky.colors)}, '${sky.name}')">
+        <button class="card-btn" onclick="event.stopPropagation();downloadGrad(${JSON.stringify(sky.colors)}, '${sky.name}')">
           <svg viewBox="0 0 24 24"><path d="M12 3v13M8 12l4 4 4-4"/><path d="M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2"/></svg>
           Download PNG
         </button>
@@ -599,18 +608,9 @@ archive.forEach(month => {
       </div>
     `;
 
-    const colorBar = document.createElement('div');
-    colorBar.className = 'card-colors';
-    sky.colors.forEach(c => {
-      const seg = document.createElement('div');
-      seg.className = 'card-color-seg';
-      seg.style.background = c;
-      colorBar.appendChild(seg);
-    });
-
-    card.appendChild(img);
+    card.appendChild(blurImg);
+    card.appendChild(photo);
     card.appendChild(overlay);
-    card.appendChild(colorBar);
     card.onclick = () => openLB(sky);
     grid.appendChild(card);
   });
@@ -619,27 +619,19 @@ archive.forEach(month => {
   archiveEl.appendChild(sec);
 });
 
-// ── LIGHTBOX ──
-let currentSky = null;
-
+// ═══════════════════════════════════════════════════════
+// LIGHTBOX
+// ═══════════════════════════════════════════════════════
 function openLB(sky) {
   currentSky = sky;
-  document.getElementById('lb-location').textContent = sky.location.toUpperCase();
-  document.getElementById('lb-title').textContent = sky.name;
+  document.getElementById('lb-photo').src = sky.src;
+  document.getElementById('lb-loc').textContent = sky.location.toUpperCase();
+  document.getElementById('lb-name').textContent = sky.name;
 
-  // Draw gradient
-  const cvs = document.getElementById('lb-canvas');
-  const ctx = cvs.getContext('2d');
-  const grad = ctx.createLinearGradient(0, 0, 480, 240);
-  sky.colors.forEach((c, i) => grad.addColorStop(i / (sky.colors.length - 1), c));
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, 480, 240);
-
-  // Swatches
   const sw = document.getElementById('lb-swatches');
   sw.innerHTML = sky.colors.map(c => `
     <div class="lb-swatch" onclick="copyHex('${c}')">
-      <div class="lb-swatch-circle" style="background:${c}"></div>
+      <div class="lb-swatch-box" style="background:${c}"></div>
       <span class="lb-hex">${c}</span>
     </div>
   `).join('');
@@ -654,55 +646,49 @@ function closeLB(e) {
 
 function downloadLB() {
   if (!currentSky) return;
+  downloadGrad(currentSky.colors, currentSky.name);
+}
+
+function downloadGrad(colors, name) {
   const cvs = document.createElement('canvas');
-  cvs.width = 1200; cvs.height = 1600;
+  cvs.width = 1200; cvs.height = 900;
   const ctx = cvs.getContext('2d');
-  const grad = ctx.createLinearGradient(0, 0, 0, 1600);
-  currentSky.colors.forEach((c, i) => grad.addColorStop(i / (currentSky.colors.length - 1), c));
+  const grad = ctx.createLinearGradient(0, 0, 1200, 900);
+  colors.forEach((c, i) => grad.addColorStop(i / (colors.length - 1), c));
   ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, 1200, 1600);
+  ctx.fillRect(0, 0, 1200, 900);
   const a = document.createElement('a');
-  a.download = currentSky.name.replace(/\s+/g,'-').toLowerCase() + '.png';
+  a.download = name.replace(/\s+/g, '-').toLowerCase() + '-gradient.png';
   a.href = cvs.toDataURL('image/png');
   a.click();
 }
 
 function copyLBCSS() {
   if (!currentSky) return;
-  const stops = currentSky.colors.map((c,i) => `${c} ${Math.round(i/(currentSky.colors.length-1)*100)}%`).join(', ');
-  navigator.clipboard.writeText(`background: linear-gradient(to bottom, ${stops});`).catch(()=>{});
-  const btn = document.getElementById('css-copy-btn');
+  const css = makeCSS(currentSky.colors);
+  navigator.clipboard.writeText(css).catch(() => {});
+  const btn = document.getElementById('lb-css-btn');
   const orig = btn.innerHTML;
   btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
-  setTimeout(() => btn.innerHTML = orig, 1800);
-  showToast('CSS copied to clipboard');
-}
-
-function downloadCard(colors, name) {
-  const cvs = document.createElement('canvas');
-  cvs.width = 1200; cvs.height = 1600;
-  const ctx = cvs.getContext('2d');
-  const grad = ctx.createLinearGradient(0, 0, 0, 1600);
-  colors.forEach((c, i) => grad.addColorStop(i / (colors.length - 1), c));
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, 1200, 1600);
-  const a = document.createElement('a');
-  a.download = name.replace(/\s+/g,'-').toLowerCase() + '.png';
-  a.href = cvs.toDataURL('image/png');
-  a.click();
+  setTimeout(() => btn.innerHTML = orig, 2000);
+  showToast('CSS gradient copied!');
 }
 
 function copyCSSCard(colors, btn) {
-  const stops = colors.map((c,i) => `${c} ${Math.round(i/(colors.length-1)*100)}%`).join(', ');
-  navigator.clipboard.writeText(`background: linear-gradient(to bottom, ${stops});`).catch(()=>{});
+  navigator.clipboard.writeText(makeCSS(colors)).catch(() => {});
   const orig = btn.innerHTML;
   btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
-  setTimeout(() => btn.innerHTML = orig, 1800);
-  showToast('CSS copied to clipboard');
+  setTimeout(() => btn.innerHTML = orig, 2000);
+  showToast('CSS gradient copied!');
+}
+
+function makeCSS(colors) {
+  const stops = colors.map((c, i) => `${c} ${Math.round(i / (colors.length - 1) * 100)}%`).join(', ');
+  return `background: linear-gradient(135deg, ${stops});`;
 }
 
 function copyHex(hex) {
-  navigator.clipboard.writeText(hex).catch(()=>{});
+  navigator.clipboard.writeText(hex).catch(() => {});
   showToast(`${hex} copied`);
 }
 
@@ -710,8 +696,9 @@ function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2000);
+  setTimeout(() => t.classList.remove('show'), 2200);
 }
 </script>
+
 </body>
 </html>
