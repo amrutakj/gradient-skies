@@ -212,9 +212,128 @@ nav{
 }
 .toast.show{opacity:1;}
 
+.create-btn{
+  font-family:'Bricolage';
+  font-weight:500;
+  font-size:13px;
+  color:var(--text2);
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:100px;
+  padding:10px 18px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:7px;
+  transition:border-color 0.2s,color 0.2s,background 0.2s;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.create-btn:hover{color:var(--text);border-color:rgba(0,0,0,0.25);background:#f2ede4;}
+.create-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.6;}
+
+/* ── CREATOR MODAL ── */
+.creator-overlay{
+  position:fixed;inset:0;background:rgba(30,26,20,0.55);
+  backdrop-filter:blur(14px);z-index:300;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.2s;padding:1.5rem;
+}
+.creator-overlay.open{opacity:1;pointer-events:all;}
+
+.creator-inner{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:22px;overflow:hidden;width:min(720px,100%);
+  max-height:90vh;overflow-y:auto;
+  transform:scale(0.97);transition:transform 0.25s ease;
+  box-shadow:0 32px 80px rgba(0,0,0,0.3);
+  position:relative;
+}
+.creator-overlay.open .creator-inner{transform:scale(1);}
+
+.creator-close{
+  position:absolute;top:16px;right:16px;
+  background:var(--bg);border:1px solid var(--border2);
+  border-radius:50%;width:34px;height:34px;color:var(--text);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;line-height:1;
+  transition:background 0.15s;z-index:10;
+}
+.creator-close:hover{background:#f0ebe3;}
+
+.creator-body{padding:2rem 2rem 1.75rem;}
+.creator-title{font-family:'Bricolage';font-weight:700;font-size:22px;letter-spacing:-0.01em;color:var(--text);margin-bottom:4px;}
+.creator-sub{font-family:'Bricolage';font-weight:500;font-size:13px;color:#6b6459;margin-bottom:1.5rem;}
+
+.creator-drop{
+  border:1.5px dashed var(--border2);
+  border-radius:16px;
+  padding:3rem 1.5rem;
+  text-align:center;
+  cursor:pointer;
+  background:var(--bg);
+  transition:border-color 0.2s,background 0.2s;
+  position:relative;
+}
+.creator-drop:hover,.creator-drop.drag-over{border-color:rgba(0,0,0,0.3);background:#f2ede4;}
+.creator-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+
+.creator-drop-icon{
+  width:44px;height:44px;background:var(--surface);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border2);margin:0 auto 0.75rem;
+}
+.creator-drop-icon svg{width:20px;height:20px;stroke:var(--text2);fill:none;stroke-width:1.6;}
+.creator-drop-label{font-family:'Bricolage';font-weight:500;font-size:14px;color:var(--text);margin-bottom:0.25rem;}
+.creator-drop-sub{font-size:12px;color:var(--text3);}
+
+.creator-result{display:none;}
+.creator-preview-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  margin-bottom:1.25rem;
+}
+@media(max-width:480px){.creator-preview-row{grid-template-columns:1fr;}}
+
+.creator-preview-box{
+  border-radius:14px;overflow:hidden;aspect-ratio:4/3;
+  border:1px solid var(--border);
+  position:relative;background:#eee;
+}
+.creator-preview-box img{width:100%;height:100%;object-fit:cover;display:block;}
+.creator-preview-box canvas{width:100%;height:100%;display:block;}
+.creator-preview-label{
+  position:absolute;bottom:8px;left:10px;
+  font-family:'Bricolage';font-weight:500;
+  font-size:10px;letter-spacing:0.08em;text-transform:uppercase;
+  color:rgba(255,255,255,0.9);text-shadow:0 1px 4px rgba(0,0,0,0.5);
+}
+
+.creator-swatches{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.creator-swatch{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;}
+.creator-swatch-box{width:40px;height:40px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);transition:transform 0.15s;}
+.creator-swatch:hover .creator-swatch-box{transform:scale(1.1);}
+.creator-swatch-hex{font-size:10px;font-family:monospace;color:var(--text3);}
+
+.creator-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.creator-btn{
+  font-family:'Bricolage';font-weight:500;
+  font-size:12px;color:var(--text);
+  background:var(--bg);border:1px solid var(--border2);
+  border-radius:100px;padding:10px 20px;cursor:pointer;
+  display:flex;align-items:center;gap:7px;transition:background 0.15s,border-color 0.15s;
+}
+.creator-btn:hover{background:#f0ebe3;border-color:rgba(0,0,0,0.22);}
+.creator-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+
+.creator-reset{
+  font-family:'Bricolage';font-weight:500;
+  font-size:13px;color:var(--text3);
+  background:none;border:none;cursor:pointer;
+  margin-top:1.25rem;text-decoration:underline;
+  text-underline-offset:2px;
+}
+.creator-reset:hover{color:var(--text2);}
+
 @media(max-width:640px){
-  nav{padding:1.25rem 1.25rem;}
-  .meta-bar,.archive{padding-left:1.25rem;padding-right:1.25rem;}
+  .creator-body{padding:1.5rem 1.25rem;}
 }
 </style>
 </head>
@@ -222,6 +341,10 @@ nav{
 
 <nav>
   <h1 class="nav-title">Found in <span>Nature</span></h1>
+  <button class="create-btn" onclick="openCreator()">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    Create your own
+  </button>
 </nav>
 
 <div class="meta-bar">
@@ -258,6 +381,51 @@ nav{
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- CREATOR MODAL -->
+<div class="creator-overlay" id="creator-overlay" onclick="closeCreatorOnBg(event)">
+  <div class="creator-inner">
+    <button class="creator-close" onclick="closeCreator()">×</button>
+    <div class="creator-body">
+      <h2 class="creator-title">Create your own</h2>
+      <p class="creator-sub">Upload a photo — we'll blur it into a soft gradient and pull out its colours.</p>
+
+      <div class="creator-drop" id="creator-drop">
+        <input type="file" id="creator-file-input" accept="image/*">
+        <div class="creator-drop-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <p class="creator-drop-label">Drop your photo here</p>
+        <p class="creator-drop-sub">or click to browse</p>
+      </div>
+
+      <div class="creator-result" id="creator-result">
+        <div class="creator-preview-row">
+          <div class="creator-preview-box">
+            <img id="creator-original" alt="Your photo">
+            <span class="creator-preview-label">Original</span>
+          </div>
+          <div class="creator-preview-box">
+            <canvas id="creator-blur-canvas"></canvas>
+            <span class="creator-preview-label">Blurred</span>
+          </div>
+        </div>
+        <div class="creator-swatches" id="creator-swatches"></div>
+        <div class="creator-actions">
+          <button class="creator-btn" onclick="downloadCreatorBlur()">
+            <svg viewBox="0 0 24 24"><path d="M12 3v13M8 12l4 4 4-4"/><path d="M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2"/></svg>
+            Download blurred PNG
+          </button>
+          <button class="creator-btn" id="creator-css-btn" onclick="copyCreatorCSS()">
+            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy CSS code
+          </button>
+        </div>
+        <button class="creator-reset" onclick="resetCreator()">← Try another photo</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 // ─────────────────────────────────────────────────────────
@@ -524,6 +692,179 @@ function showToast(msg) {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2200);
 }
+
+// ═══════════════════════════════════════════════════════
+// CREATE YOUR OWN — in-page photo-to-gradient tool
+// ═══════════════════════════════════════════════════════
+const creatorOverlay = document.getElementById('creator-overlay');
+const creatorDrop = document.getElementById('creator-drop');
+const creatorFileInput = document.getElementById('creator-file-input');
+const creatorResult = document.getElementById('creator-result');
+const creatorOriginal = document.getElementById('creator-original');
+const creatorBlurCanvas = document.getElementById('creator-blur-canvas');
+const creatorSwatchesEl = document.getElementById('creator-swatches');
+
+let creatorColors = [];
+let creatorImgObj = null;
+
+function openCreator() {
+  creatorOverlay.classList.add('open');
+}
+function closeCreator() {
+  creatorOverlay.classList.remove('open');
+}
+function closeCreatorOnBg(e) {
+  if (e.target === creatorOverlay) closeCreator();
+}
+
+creatorDrop.addEventListener('dragover', e => { e.preventDefault(); creatorDrop.classList.add('drag-over'); });
+creatorDrop.addEventListener('dragleave', () => creatorDrop.classList.remove('drag-over'));
+creatorDrop.addEventListener('drop', e => {
+  e.preventDefault();
+  creatorDrop.classList.remove('drag-over');
+  handleCreatorFile(e.dataTransfer.files[0]);
+});
+creatorFileInput.addEventListener('change', e => handleCreatorFile(e.target.files[0]));
+
+function handleCreatorFile(file) {
+  if (!file || !file.type.startsWith('image/')) return;
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.onload = () => {
+    creatorImgObj = img;
+    creatorOriginal.src = url;
+
+    // Extract colours from a small sampled canvas
+    const sampleCanvas = document.createElement('canvas');
+    sampleCanvas.width = 140; sampleCanvas.height = 140;
+    const sctx = sampleCanvas.getContext('2d');
+    sctx.drawImage(img, 0, 0, 140, 140);
+    const data = sctx.getImageData(0, 0, 140, 140).data;
+    creatorColors = extractCreatorColors(data);
+    renderCreatorSwatches();
+
+    // Draw blurred preview at the box's rendered size
+    drawCreatorBlurPreview();
+
+    creatorDrop.style.display = 'none';
+    creatorResult.style.display = 'block';
+  };
+  img.src = url;
+}
+
+function extractCreatorColors(data, n = 5) {
+  const buckets = {};
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i+3] < 128) continue;
+    const r = Math.round(data[i] / 22) * 22;
+    const g = Math.round(data[i+1] / 22) * 22;
+    const b = Math.round(data[i+2] / 22) * 22;
+    const key = `${r},${g},${b}`;
+    if (!buckets[key]) buckets[key] = { r, g, b, count: 0 };
+    buckets[key].count++;
+  }
+  let sorted = Object.values(buckets).sort((a, b) => b.count - a.count);
+  const picked = [];
+  for (const c of sorted) {
+    if (picked.length >= n) break;
+    let far = true;
+    for (const p of picked) {
+      const d = Math.sqrt((c.r-p.r)**2 + (c.g-p.g)**2 + (c.b-p.b)**2);
+      if (d < 45) { far = false; break; }
+    }
+    if (far) picked.push(c);
+  }
+  picked.sort((a, b) => (0.299*b.r+0.587*b.g+0.114*b.b) - (0.299*a.r+0.587*a.g+0.114*a.b));
+  return picked.map(c => `#${c.r.toString(16).padStart(2,'0')}${c.g.toString(16).padStart(2,'0')}${c.b.toString(16).padStart(2,'0')}`);
+}
+
+function renderCreatorSwatches() {
+  creatorSwatchesEl.innerHTML = creatorColors.map(c => `
+    <div class="creator-swatch" onclick="copyHex('${c}')">
+      <div class="creator-swatch-box" style="background:${c}"></div>
+      <span class="creator-swatch-hex">${c}</span>
+    </div>
+  `).join('');
+}
+
+function drawCreatorBlurPreview() {
+  if (!creatorImgObj) return;
+  const box = creatorBlurCanvas.parentElement;
+  const W = box.clientWidth || 300;
+  const H = box.clientHeight || 225;
+  creatorBlurCanvas.width = W;
+  creatorBlurCanvas.height = H;
+  const ctx = creatorBlurCanvas.getContext('2d');
+
+  const imgRatio = creatorImgObj.width / creatorImgObj.height;
+  const boxRatio = W / H;
+  let drawW, drawH, offsetX, offsetY;
+  if (imgRatio > boxRatio) {
+    drawH = H; drawW = H * imgRatio;
+    offsetX = (W - drawW) / 2; offsetY = 0;
+  } else {
+    drawW = W; drawH = W / imgRatio;
+    offsetX = 0; offsetY = (H - drawH) / 2;
+  }
+
+  ctx.filter = 'blur(18px) saturate(1.3) brightness(1.02)';
+  const pad = 30;
+  ctx.drawImage(creatorImgObj, offsetX - pad, offsetY - pad, drawW + pad*2, drawH + pad*2);
+}
+
+function downloadCreatorBlur() {
+  if (!creatorImgObj) return;
+  const W = 1200, H = 900;
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  const imgRatio = creatorImgObj.width / creatorImgObj.height;
+  const canvasRatio = W / H;
+  let drawW, drawH, offsetX, offsetY;
+  if (imgRatio > canvasRatio) {
+    drawH = H; drawW = H * imgRatio;
+    offsetX = (W - drawW) / 2; offsetY = 0;
+  } else {
+    drawW = W; drawH = W / imgRatio;
+    offsetX = 0; offsetY = (H - drawH) / 2;
+  }
+
+  const blurAmount = 70;
+  ctx.filter = `blur(${blurAmount}px) saturate(1.3) brightness(1.02)`;
+  const pad = blurAmount * 3;
+  ctx.drawImage(creatorImgObj, offsetX - pad, offsetY - pad, drawW + pad*2, drawH + pad*2);
+
+  const a = document.createElement('a');
+  a.download = 'my-blurred-photo.png';
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+  showToast('Blurred PNG downloaded!');
+}
+
+function copyCreatorCSS() {
+  if (!creatorColors.length) return;
+  const stops = creatorColors.map((c, i) => `${c} ${Math.round(i / (creatorColors.length - 1) * 100)}%`).join(', ');
+  const css = `background: linear-gradient(135deg, ${stops});`;
+  navigator.clipboard.writeText(css).catch(() => {});
+  const btn = document.getElementById('creator-css-btn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+  setTimeout(() => btn.innerHTML = orig, 2000);
+  showToast('CSS gradient copied!');
+}
+
+function resetCreator() {
+  creatorResult.style.display = 'none';
+  creatorDrop.style.display = 'block';
+  creatorFileInput.value = '';
+  creatorColors = [];
+  creatorImgObj = null;
+}
+
+window.addEventListener('resize', () => {
+  if (creatorImgObj) drawCreatorBlurPreview();
+});
 </script>
 </body>
 </html>
