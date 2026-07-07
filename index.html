@@ -466,10 +466,14 @@ function downloadBlurred(src, name) {
       offsetY = (H - drawH) / 2;
     }
 
-    // Apply the SAME blur/saturate/brightness filter as the CSS card-blur class
-    ctx.filter = 'blur(18px) saturate(1.3) brightness(1.02)';
-    // Overscan slightly so blur doesn't leave transparent edges
-    ctx.drawImage(img, offsetX - 20, offsetY - 20, drawW + 40, drawH + 40);
+    // Blur radius must scale with resolution — 18px looks strong on a
+    // ~300px-wide card but barely visible on a 1200px export, so we
+    // scale it up proportionally to match the on-screen look.
+    const blurAmount = 70;
+    ctx.filter = `blur(${blurAmount}px) saturate(1.3) brightness(1.02)`;
+    // Generous overscan so the heavy blur doesn't leave soft/transparent edges
+    const pad = blurAmount * 3;
+    ctx.drawImage(img, offsetX - pad, offsetY - pad, drawW + pad * 2, drawH + pad * 2);
 
     const a = document.createElement('a');
     a.download = name.replace(/\s+/g, '-').toLowerCase() + '-blurred.png';
